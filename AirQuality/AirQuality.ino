@@ -40,7 +40,7 @@ void loop()
 	Serial.print("sensor has valid value: "); Serial.println(iaq.hasValue() ? "true" : "false");
 
 	if (iaq.isRunin()) {
-		Serial.println("Sensor in Run-in");
+		Serial.println("Sensor in Run-in state");
     led[0] = CHSV(200, 255, 128);
     FastLED.show();
 	}
