@@ -13,25 +13,68 @@ void printBanner()
     printMessage(0);
 }
 
-void printReport(uint32_t co2, uint32_t tvoc)
+void printReport(float dustDensity, float humidity, float temperature, float dewpoint, uint32_t co2, uint32_t tvoc, bool airQValid)
 {
     VT100.setCursor(10, 2);
     VT100.setTextColor(VT_YELLOW);
-    Serial.print("CO2: ");
+    Serial.print("PM2.5: ");
     VT100.setTextColor(VT_WHITE);
-    Serial.print(co2);
-    Serial.println("ppm");
+    Serial.print(dustDensity);
+    Serial.println(" mg/m3");
 
     VT100.setCursor(12, 2);
     VT100.setTextColor(VT_YELLOW);
+    Serial.print("Humidity: ");
+    VT100.setTextColor(VT_WHITE);
+    Serial.print(humidity);
+    Serial.println(" %RH");
+
+    VT100.setCursor(14, 2);
+    VT100.setTextColor(VT_YELLOW);
+    Serial.print("Temp: ");
+    VT100.setTextColor(VT_WHITE);
+    Serial.print(temperature);
+    Serial.println(" C");
+
+    VT100.setCursor(16, 2);
+    VT100.setTextColor(VT_YELLOW);
+    Serial.print("Dewpoint: ");
+    VT100.setTextColor(VT_WHITE);
+    Serial.print(dewpoint);
+    Serial.println(" C");
+
+    VT100.setCursor(18, 2);
+    VT100.setTextColor(VT_YELLOW);
+    Serial.print("CO2: ");
+    VT100.setTextColor(VT_WHITE);
+    if (airQValid)
+    {
+        Serial.print(co2);
+    }
+    else
+    {
+        Serial.print("---");
+    }
+    Serial.println(" ppm");
+
+    VT100.setCursor(20, 2);
+    VT100.setTextColor(VT_YELLOW);
     Serial.print("TVOC: ");
     VT100.setTextColor(VT_WHITE);
-    Serial.print(tvoc);
-    Serial.println("ppb");
+    if (airQValid)
+    {
+        Serial.print(tvoc);
+    }
+    else
+    {
+        Serial.print("---");
+    }
+    Serial.println(" ppb");
+
     VT100.cursorOff();
 }
 
-void printStatusBar(bool valid, bool runIn, bool error, bool busy)
+void printStatusBar(bool airQValid, bool runIn, bool error, bool busy)
 {
     VT100.setBackgroundColor(VT_BLACK);
     VT100.clearScreen();
@@ -43,7 +86,7 @@ void printStatusBar(bool valid, bool runIn, bool error, bool busy)
     VT100.setTextColor(VT_BLACK);
     Serial.print(" AirQ V1.0 ");
 
-    if (valid)
+    if (airQValid)
     {
         Serial.print(" VLD ");
     }
