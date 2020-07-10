@@ -13,63 +13,42 @@ void printBanner()
     printMessage(0);
 }
 
+void reportValue(uint8_t row, float value, char *label, char *unit)
+{
+    VT100.setCursor(row, 4);
+    VT100.setTextColor(VT_YELLOW);
+    Serial.print(label);
+
+    VT100.setCursor(row, 19);
+    VT100.setTextColor(VT_WHITE);
+    Serial.print(value);
+    Serial.print(" ");
+    Serial.println(unit);
+}
+
 void printReport(float dustDensity, float humidity, float temperature, float dewpoint, uint32_t co2, uint32_t tvoc, bool airQValid)
 {
-    VT100.setCursor(10, 2);
-    VT100.setTextColor(VT_YELLOW);
-    Serial.print("PM2.5: ");
-    VT100.setTextColor(VT_WHITE);
-    Serial.print(dustDensity);
-    Serial.println(" mg/m3");
+    VT100.setCursor(10, 1);
+    Serial.println(F(" \e(0\x6c\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x77\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x77\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6b\e(B"));
+    Serial.println(F(" \e(0\x78              \x78            \x78                                               \x78\e(B"));
+    Serial.println(F(" \e(0\x74\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x75\e(B"));
+    Serial.println(F(" \e(0\x78              \x78            \x78                                               \x78\e(B"));
+    Serial.println(F(" \e(0\x74\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x75\e(B"));
+    Serial.println(F(" \e(0\x78              \x78            \x78                                               \x78\e(B"));
+    Serial.println(F(" \e(0\x74\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x75\e(B"));
+    Serial.println(F(" \e(0\x78              \x78            \x78                                               \x78\e(B"));
+    Serial.println(F(" \e(0\x74\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x75\e(B"));
+    Serial.println(F(" \e(0\x78              \x78            \x78                                               \x78\e(B"));
+    Serial.println(F(" \e(0\x74\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6E\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x75\e(B"));
+    Serial.println(F(" \e(0\x78              \x78            \x78                                               \x78\e(B"));
+    Serial.println(F(" \e(0\x6d\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x76\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x76\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x71\x6a\e(B"));
 
-    VT100.setCursor(12, 2);
-    VT100.setTextColor(VT_YELLOW);
-    Serial.print("Humidity: ");
-    VT100.setTextColor(VT_WHITE);
-    Serial.print(humidity);
-    Serial.println(" %RH");
-
-    VT100.setCursor(14, 2);
-    VT100.setTextColor(VT_YELLOW);
-    Serial.print("Temp: ");
-    VT100.setTextColor(VT_WHITE);
-    Serial.print(temperature);
-    Serial.println(" C");
-
-    VT100.setCursor(16, 2);
-    VT100.setTextColor(VT_YELLOW);
-    Serial.print("Dewpoint: ");
-    VT100.setTextColor(VT_WHITE);
-    Serial.print(dewpoint);
-    Serial.println(" C");
-
-    VT100.setCursor(18, 2);
-    VT100.setTextColor(VT_YELLOW);
-    Serial.print("CO2: ");
-    VT100.setTextColor(VT_WHITE);
-    if (airQValid)
-    {
-        Serial.print(co2);
-    }
-    else
-    {
-        Serial.print("---");
-    }
-    Serial.println(" ppm");
-
-    VT100.setCursor(20, 2);
-    VT100.setTextColor(VT_YELLOW);
-    Serial.print("TVOC: ");
-    VT100.setTextColor(VT_WHITE);
-    if (airQValid)
-    {
-        Serial.print(tvoc);
-    }
-    else
-    {
-        Serial.print("---");
-    }
-    Serial.println(" ppb");
+    reportValue(11, dustDensity, "PM2.5", "mg/m3");
+    reportValue(13, humidity, "Humidity", "%RH");
+    reportValue(15, temperature, "Temperature", "C");
+    reportValue(17, dewpoint, "Dew Point", "C");
+    reportValue(19, co2, "CO2", "ppm");
+    reportValue(21, tvoc, "TVOC", "ppb");
 
     VT100.cursorOff();
 }
@@ -77,7 +56,7 @@ void printReport(float dustDensity, float humidity, float temperature, float dew
 void printStatusBar(bool airQValid, bool runIn, bool error, bool busy)
 {
     VT100.setBackgroundColor(VT_BLACK);
-    VT100.clearScreen();
+    //VT100.clearScreen();
 
     printBanner();
 
